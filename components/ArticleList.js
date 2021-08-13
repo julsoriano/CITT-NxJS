@@ -12,3 +12,4 @@ const ArticleList = ({ articles }) => {
 }
 
 export default ArticleList
+// <div className={articleStyles.grid}>
