@@ -32,7 +32,11 @@ export default function Sidebar(props) {
 
   // verifies if routeName is the one active (in browser input)
   function activeRoute(routeName) {
-    return router.route.indexOf(routeName) > -1 ? true : false;
+    /* original code from CT: doesn't work
+     * - return router.route.indexOf(routeName) > -1 ? true : false;
+     * - replaced with ... 
+    */
+    return router.pathname == routeName ? true : false;
   }
 
   const { color, logo, image, logoText, routes } = props;
@@ -40,23 +44,18 @@ export default function Sidebar(props) {
   var links = (
     <List className={classes.list}>
       {routes.map((prop, key) => {
-        var activePro = " ";
+        var activePro = " ";     
         var listItemClasses;
-        if (prop.path === "/upgrade-to-pro") {
-          activePro = classes.activePro + " ";
-          listItemClasses = classNames({
-            [" " + classes[color]]: true,
-          });
-        } else {
-          listItemClasses = classNames({
-            [" " + classes[color]]: activeRoute(prop.layout + prop.path),
-          });
-        }
+        
+        listItemClasses = classNames({
+          [" " + classes[color]]: activeRoute(prop.layout + prop.path), });
+
+        // var activeorNot = activeRoute(prop.layout + prop.path) ==true ? "active" : "not active";
+        // console.log("Path: " + prop.layout + prop.path + " is " + activeorNot);
+        // console.log("listItemCLasses: " + listItemClasses);
+
         const whiteFontClasses = classNames({
-          [" " + classes.whiteFont]:
-            activeRoute(prop.layout + prop.path) ||
-            prop.path === "/upgrade-to-pro",
-        });
+          [" " + classes.whiteFont]: activeRoute(prop.layout + prop.path), });
 
         return (
           <Link href={prop.layout + prop.path} key={key}>

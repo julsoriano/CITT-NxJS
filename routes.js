@@ -27,53 +27,56 @@ import Unarchive from "@material-ui/icons/Unarchive";
 import Language from "@material-ui/icons/Language";
 */
 const dashboardRoutes = [
-  /*{
-    path: "/dashboard",
-    name: "Dashboard",
-    rtlName: "لوحة القيادة",
-    icon: Dashboard,
-
-    layout: "/admin",
-  },
   {
-    path: "/user-profile",
-    name: "User Profile",
-    rtlName: "ملف تعريفي للمستخدم",
-    icon: Person,
-
-    layout: "/admin",
-  },
-  {
-    path: "/table-list",
-    name: "Table List",
-    rtlName: "قائمة الجدول",
-    icon: "content_paste",
-
-    layout: "/admin",
-  },
-  {
-    path: "/typography",
-    name: "Typography",
-    rtlName: "طباعة",
-    icon: LibraryBooks,
-
-    layout: "/admin",
-  }, 
-  {
-    path: "/index",
+    path: "",
     name: "Articles",
     icon: Dashboard,
 
-    layout: "pages",
-  }, */
+    layout: "/",
+  },
   {
-    path: "/Charts/ChartistTMHooks",
+    path: "/nxjs",
+    name: "NextJS Index",
+    icon: Dashboard,
+
+    layout: "",
+  },  
+  {
+    path: "/ChartistTM",
     name: "TM Charts",
     icon: Dashboard,
 
     layout: "/TrackMED",
   },
+  {
+    path: "/ChartistTMHooks",
+    name: "TM Charts Hooks",
+    icon: Dashboard,
+
+    layout: "/TrackMED",
+  },
+  {
+    path: "/movies",
+    name: "Top 20 Movies",
+    icon: Dashboard,
+
+    layout: "/MFlix",
+  },
+  {
+    path: "/top",
+    name: "Top 1000 Movies",
+    icon: Dashboard,
+
+    layout: "/MFlix",
+  },
   /*
+  {
+    path: "/Charts/ChartistTMStatic",
+    name: "TM Charts Static",
+    icon: Dashboard,
+
+    layout: "/TrackMED",
+  },
   {
     path: "/Owner",
     name: "Owner",

@@ -1,11 +1,11 @@
 import React from "react";
-import Document, { Head, Main, NextScript } from "next/document";
+import Document, { Html, Head, Main, NextScript } from "next/document";
 import { ServerStyleSheets } from "@material-ui/styles";
 
 class MyDocument extends Document {
   render() {
     return (
-      <html lang="en">
+      <Html lang="en">
         <Head>
           <meta charSet="utf-8" />
           <meta name="theme-color" content="#000000" />
@@ -35,11 +35,10 @@ class MyDocument extends Document {
           />
         </Head>
         <body>
-          <div id="page-transition"></div>
           <Main />
           <NextScript />
         </body>
-      </html>
+      </Html>
     );
   }
 }
@@ -89,5 +88,55 @@ MyDocument.getInitialProps = async (ctx) => {
     ],
   };
 };
+
+/** https://stackblitz.com/github/vercel/next.js/tree/canary/examples/with-styled-components
+import Document from 'next/document'
+import { ServerStyleSheet } from 'styled-components'
+
+/* Context Object
+
+  getInitialProps receives a single argument called context, it's an object with the following properties:
+
+      pathname - Current route. That is the path of the page in /pages
+      query - Query string section of URL parsed as an object
+      asPath - String of the actual path (including the query) shown in the browser
+      req - HTTP request object (server only)
+      res - HTTP response object (server only)
+      err - Error object if any error is encountered during the rendering
+
+export default class MyDocument extends Document {
+  static async getInitialProps(ctx) {
+
+    const sheet = new ServerStyleSheet()
+    const originalRenderPage = ctx.renderPage
+
+/* ctx.renderPage
+The ctx object is equivalent to the one received in getInitialProps, with one addition:
+
+    renderPage: Function - a callback that runs the actual React rendering logic (synchronously). It's useful to decorate this function in order to support server-rendering wrappers like Aphrodite's renderStatic
+
+    try {
+      ctx.renderPage = () =>
+        originalRenderPage({
+          enhanceApp: (App) => (props) =>
+            sheet.collectStyles(<App {...props} />),
+        })
+
+      const initialProps = await Document.getInitialProps(ctx)
+      return {
+        ...initialProps,
+        styles: (
+          <>
+            {initialProps.styles}
+            {sheet.getStyleElement()}
+          </>
+        ),
+      }
+    } finally {
+      sheet.seal()
+    }
+  }
+}
+ */
 
 export default MyDocument;

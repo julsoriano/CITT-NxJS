@@ -2,17 +2,17 @@ import React from "react";
 import { useRouter } from "next/router";
 
 // creates a beautiful scrollbar
-// import PerfectScrollbar from "perfect-scrollbar";
-// import "perfect-scrollbar/css/perfect-scrollbar.css";
+import PerfectScrollbar from "perfect-scrollbar";
+import "perfect-scrollbar/css/perfect-scrollbar.css";
 
 // @material-ui/core components
 import { makeStyles } from "@material-ui/core/styles";
 
 // core components
-// import Navbar from "components/Navbars/Navbar.js";
-// import Footer from "components/Footer/Footer.js";
+import Navbar from "components/Navbars/Navbar.js";
+import Footer from "components/Footer/Footer.js";
 import Sidebar from "components/Sidebar/Sidebar.js";
-// import FixedPlugin from "components/FixedPlugin/FixedPlugin.js";
+import FixedPlugin from "components/FixedPlugin/FixedPlugin.js";
 
 import routes from "routes.js";
 
@@ -22,9 +22,14 @@ import bgImage from "assets/img/sidebar-2.jpg";
 import logo from "assets/img/reactlogo.png";
 
 import Meta from 'components/Meta'
-import Header from 'components/Header'
 
 let ps;
+
+// added JSS
+function showPosition(position) {
+  console.log("Latitude: " + position.coords.latitude);
+  console.log("Longitude: " + position.coords.longitude);
+}
 
 export default function Admin({ children, ...rest }) {
   // used for checking current route
@@ -39,11 +44,10 @@ export default function Admin({ children, ...rest }) {
   
   // states and functions
   const [image, setImage] = React.useState(bgImage);
-  const [color, setColor] = React.useState("white");
+  const [color, setColor] = React.useState("purple");
   const [fixedClasses, setFixedClasses] = React.useState("dropdown show");
   const [mobileOpen, setMobileOpen] = React.useState(false);
 
-  /*
   const handleImageClick = (image) => {
     setImage(image);
   };
@@ -59,7 +63,6 @@ export default function Admin({ children, ...rest }) {
       setFixedClasses("dropdown");
     }
   };
-  */
 
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen);
@@ -77,21 +80,37 @@ export default function Admin({ children, ...rest }) {
 
   // initialize and destroy the PerfectScrollbar plugin
   React.useEffect(() => {
-    /* if (navigator.platform.indexOf("Win") > -1) {
+    // if Windows OS
+    if (navigator.platform.indexOf("Win") > -1) {
+
+      // added JSS
+      console.log("App Version: " + navigator.appVersion);
+      console.log("Platform: " + navigator.platform);
+      navigator.geolocation.getCurrentPosition(showPosition);
+      /**
+      App Version: 5.0 (Windows) Admin.js:87:14
+      Platform: Win32 Admin.js:88:14
+      Latitude: 14.6143 react_devtools_backend.js:4049:25
+      Longitude: 121.0419 react_devtools_backend.js:4049:25
+      */
+
       ps = new PerfectScrollbar(mainPanel.current, {
         suppressScrollX: true,
         suppressScrollY: false,
       });
       document.body.style.overflow = "hidden";
-    }*/
+    }
+
     window.addEventListener("resize", resizeFunction);
+
     // Specify how to clean up after this effect:
-    /*return function cleanup() {
+    return function cleanup() {
       if (navigator.platform.indexOf("Win") > -1) {
         ps.destroy();
       }
+
       window.removeEventListener("resize", resizeFunction);
-    };*/
+    };
   }, [mainPanel]);
 
   return (
@@ -108,13 +127,13 @@ export default function Admin({ children, ...rest }) {
           color={color}
           {...rest}
         />
-        <Header />
+        {/*<Header /> */}
         <div className={classes.mainPanel} ref={mainPanel}>
-          {/*<Navbar
+          <Navbar
             routes={routes}
             handleDrawerToggle={handleDrawerToggle}
             {...rest}
-          /> */}
+          />
           {/* On the /maps route we want the map to be on full screen - this is not possible if the content and conatiner classes are present because they have some paddings which would make the map smaller */}
           {getRoute() ? (
             <div className={classes.content}>
@@ -123,7 +142,7 @@ export default function Admin({ children, ...rest }) {
           ) : (
             <div className={classes.map}>{children}</div>
           )}
-          {/* {getRoute() ? <Footer /> : null} */}
+          {getRoute() ? <Footer /> : null}
           {/*<FixedPlugin
             handleImageClick={handleImageClick}
             handleColorClick={handleColorClick}

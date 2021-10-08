@@ -14,14 +14,14 @@ import ArrowUpward from "@material-ui/icons/ArrowUpward";
 import AccessTime from "@material-ui/icons/AccessTime";
 
 // core components
-import GridItem from "components/Grid/GridItem.jsx";
-import GridContainer from "components/Grid/GridContainer.jsx";
-import Card from "components/Card/Card.jsx";
-import CardHeader from "components/Card/CardHeader.jsx";
-import CardBody from "components/Card/CardBody.jsx";
-import CardFooter from "components/Card/CardFooter.jsx";
+import GridItem from "components/Grid/GridItem";
+import GridContainer from "components/Grid/GridContainer";
+import Card from "components/Card/Card";
+import CardHeader from "components/Card/CardHeader";
+import CardBody from "components/Card/CardBody";
+import CardFooter from "components/Card/CardFooter";
 
-import dashboardStyle from "assets/jss/material-dashboard-react/views/dashboardStyle.jsx";
+import dashboardStyle from "assets/jss/nextjs-material-dashboard/views/dashboardStyle";
 
 import Chartist from "chartist";
 

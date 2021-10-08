@@ -42,6 +42,28 @@ function ChartistPage(props) {
     let mounted = true;
     fetch('http://localhost:5000/api/owner/getnoofcomps')
       .then(response => response.json())
+      .then((ownerComps) => {
+        var data = {
+          labels: ownerComps.map((ownerComps) => {
+            return ownerComps.desc;
+          }),
+          series: ownerComps.map((ownerComps) => {
+            return ownerComps.noOfComponents;
+          })
+        }
+      
+        if (mounted) {
+          setList({labels: data.labels, series: Array(data.series)})
+        } 
+      });
+    return () => mounted = false;
+  }, [])
+
+  /**
+  useEffect(() => {
+    let mounted = true;
+    fetch('http://localhost:5000/api/owner/getnoofcomps')
+      .then(response => response.json())
       .then(function(ownerComps) {
         var data = {
           labels: ownerComps.map(function(ownerComps) {
@@ -58,6 +80,7 @@ function ChartistPage(props) {
       });
     return () => mounted = false;
   }, [])
+   */
 
   const { classes } = props;
   const options = {

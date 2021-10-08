@@ -1,15 +1,18 @@
 import ArticleItem from './ArticleItem'
 import articleStyles from '../styles/Article.module.css'
+import Header from 'components/Header'
 
 const ArticleList = ({ articles }) => {
   return (
-    <div className={articleStyles.grid}>
-      {articles.map((article) => (
-        <ArticleItem article={article} />
-      ))}
-    </div>
+    <>
+      <Header />
+      <div className={articleStyles.grid}>
+        {articles.map((article) => (
+          <ArticleItem key = {article.id} article={article} />
+        ))}
+      </div>
+    </>
   )
 }
 
 export default ArticleList
-// <div className={articleStyles.grid}>
