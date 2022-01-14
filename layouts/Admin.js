@@ -6,12 +6,13 @@ import PerfectScrollbar from "perfect-scrollbar";
 import "perfect-scrollbar/css/perfect-scrollbar.css";
 
 // @material-ui/core components
-import { makeStyles } from "@material-ui/core/styles";
+import { makeStyles, useTheme } from "@material-ui/core/styles";
 
 // core components
 import Navbar from "components/Navbars/Navbar.js";
 import Footer from "components/Footer/Footer.js";
 import Sidebar from "components/Sidebar/Sidebar.js";
+// import Sidebar from "components/Sidebar/SidebarActiveLink.js";
 import FixedPlugin from "components/FixedPlugin/FixedPlugin.js";
 
 import routes from "routes.js";
@@ -34,6 +35,11 @@ function showPosition(position) {
 export default function Admin({ children, ...rest }) {
   // used for checking current route
   const router = useRouter();
+
+  // display beakpoints
+  const theme = useTheme();
+  console.log("Theme Breakpoints: " + JSON.stringify(theme.breakpoints.values))
+  // Theme Breakpoints: {"xs":0,"sm":600,"md":960,"lg":1280,"xl":1920}
 
   // styles
   const useStyles = makeStyles(styles);
@@ -68,45 +74,48 @@ export default function Admin({ children, ...rest }) {
     setMobileOpen(!mobileOpen);
   };
 
-  const getRoute = () => {
-    return router.pathname !== "/admin/maps";
-  };
-
   const resizeFunction = () => {
     if (window.innerWidth >= 960) {
       setMobileOpen(false);
     }
   };
 
+  /* children = "index.js" ? classes.main : classes.container */
+
   // initialize and destroy the PerfectScrollbar plugin
   React.useEffect(() => {
     // if Windows OS
     if (navigator.platform.indexOf("Win") > -1) {
-
+      console.log("Main Panel activated");
       // added JSS
+      /*
       console.log("App Version: " + navigator.appVersion);
       console.log("Platform: " + navigator.platform);
       navigator.geolocation.getCurrentPosition(showPosition);
-      /**
+      /*
       App Version: 5.0 (Windows) Admin.js:87:14
       Platform: Win32 Admin.js:88:14
       Latitude: 14.6143 react_devtools_backend.js:4049:25
       Longitude: 121.0419 react_devtools_backend.js:4049:25
       */
-
+      /*
       ps = new PerfectScrollbar(mainPanel.current, {
         suppressScrollX: true,
         suppressScrollY: false,
       });
-      document.body.style.overflow = "hidden";
+      */
+      document.body.style.overflow = "auto";
+      // document.body.style.overflow = "hidden";
     }
 
     window.addEventListener("resize", resizeFunction);
 
     // Specify how to clean up after this effect:
+    // This happens when another route is activated
     return function cleanup() {
       if (navigator.platform.indexOf("Win") > -1) {
-        ps.destroy();
+        console.log("Main Panel deactivated");
+        // ps.destroy();
       }
 
       window.removeEventListener("resize", resizeFunction);
@@ -134,15 +143,10 @@ export default function Admin({ children, ...rest }) {
             handleDrawerToggle={handleDrawerToggle}
             {...rest}
           />
-          {/* On the /maps route we want the map to be on full screen - this is not possible if the content and conatiner classes are present because they have some paddings which would make the map smaller */}
-          {getRoute() ? (
-            <div className={classes.content}>
-              <div className={classes.container}>{children}</div>
-            </div>
-          ) : (
-            <div className={classes.map}>{children}</div>
-          )}
-          {getRoute() ? <Footer /> : null}
+          <div className={classes.content}>
+            <div className={router.pathname == "/" ? classes.main : classes.container}>{children}</div>
+          </div>
+          <Footer /> : null
           {/*<FixedPlugin
             handleImageClick={handleImageClick}
             handleColorClick={handleColorClick}

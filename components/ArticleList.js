@@ -1,6 +1,6 @@
 import ArticleItem from './ArticleItem'
 import articleStyles from '../styles/Article.module.css'
-import Header from 'components/Header'
+import Header from '../components/Header.js'
 
 const ArticleList = ({ articles }) => {
   return (

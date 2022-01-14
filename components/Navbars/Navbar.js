@@ -20,9 +20,11 @@ import styles from "assets/jss/nextjs-material-dashboard/components/headerStyle.
 export default function Header(props) {
   // used for checking current route
   const router = useRouter();
+
   // create styles for this component
   const useStyles = makeStyles(styles);
   const classes = useStyles();
+
   function makeBrand() {
     var name = "NextJS Material Dashboard";
     props.routes.map((prop) => {
@@ -33,13 +35,26 @@ export default function Header(props) {
     });
     return name;
   }
+
   const { color } = props;
   const appBarClasses = classNames({
     [" " + classes[color]]: color,
   });
+  
   return (
     <AppBar className={classes.appBar + appBarClasses}>
       <Toolbar className={classes.container}>
+        {/* 
+          Without {classes.flex} the next block <AdminNavbarLinks /> will lie immediately alongside
+
+          Flexbox can solve this. We make the div a flex container. We then set the content area to flex: 1, 
+            which is the shorthand for flex: 1 1 0 — the item can grow and shrink from a flex basis of 0. 
+            As this is the only item that can grow, it takes up all available space in the flex container and 
+            pushes <AdminNavbarLinks /> to the rightmost. If you remove the flex property from the live example 
+            you will see how <AdminNavbarLinks /> slides directly right of the content.
+            - source: Card Layout Pushing Footer Down, 
+              https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Flexible_Box_Layout/Typical_Use_Cases_of_Flexbox#card_layout_pushing_footer_down        
+        */}
         <div className={classes.flex}>
           {/* Here we create navbar brand, based on route name */}
           <Button color="transparent" href="#" className={classes.title}>

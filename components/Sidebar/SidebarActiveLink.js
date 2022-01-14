@@ -20,6 +20,8 @@ import RTLNavbarLinks from "components/Navbars/RTLNavbarLinks.js";
 
 import styles from "assets/jss/nextjs-material-dashboard/components/sidebarStyle.js";
 
+import ActiveLink from '../NavbarsNew/ActiveLink.js'
+
 export default function Sidebar(props) {
 
   // creates styles for this component
@@ -47,42 +49,32 @@ export default function Sidebar(props) {
         listItemClasses = classNames({
           [" " + classes[color]]: activeRoute(prop.layout + prop.path), });
 
-        // var activeorNot = activeRoute(prop.layout + prop.path) ==true ? "active" : "not active";
-        // console.log("Path: " + prop.layout + prop.path + " is " + activeorNot);
-        // console.log("listItemCLasses: " + listItemClasses);
-
         const whiteFontClasses = classNames({
           [" " + classes.whiteFont]: activeRoute(prop.layout + prop.path), });
 
         return (
-          <Link href={prop.layout + prop.path} key={key}>
+          <ActiveLink activeClassName = "active" href={prop.layout + prop.path} key={key}>
             <a className={activePro + classes.item}>
-              <ListItem button className={classes.itemLink + listItemClasses}>
+              <ListItem button className={classes.itemLink}>
                 {typeof prop.icon === "string" ? (
                   <Icon
-                    className={classNames(classes.itemIcon, whiteFontClasses, {
-                      [classes.itemIconRTL]: props.rtlActive,
-                    })}
+                    className={classNames(classes.itemIcon, whiteFontClasses)}
                   >
                     {prop.icon}
                   </Icon>
                 ) : (
                   <prop.icon
-                    className={classNames(classes.itemIcon, whiteFontClasses, {
-                      [classes.itemIconRTL]: props.rtlActive,
-                    })}
+                    className={classNames(classes.itemIcon, whiteFontClasses)}
                   />
                 )}
                 <ListItemText
-                  primary={props.rtlActive ? prop.rtlName : prop.name}
-                  className={classNames(classes.itemText, whiteFontClasses, {
-                    [classes.itemTextRTL]: props.rtlActive,
-                  })}
+                  primary={prop.name}
+                  className={classNames(classes.itemText, whiteFontClasses)}
                   disableTypography={true}
                 />
               </ListItem>
             </a>
-          </Link>
+          </ActiveLink>
         );
       })}
     </List>

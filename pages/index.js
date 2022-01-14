@@ -2,6 +2,7 @@ import { server } from '../config'
 import ArticleList from '../components/ArticleList'
 
 export default function Home({ articles }) {
+  console.log("Article List");
   return (
     <div>
       <ArticleList articles={articles} />

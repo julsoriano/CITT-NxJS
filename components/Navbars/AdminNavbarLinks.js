@@ -50,6 +50,9 @@ export default function AdminNavbarLinks() {
   };
   return (
     <div>
+      <div className={classes.screensize}>
+        <p>Screen size: {size.width} x {size.height}</p>
+      </div>
       <div className={classes.searchWrapper}>
         <CustomInput
           formControlProps={{
@@ -102,10 +105,7 @@ export default function AdminNavbarLinks() {
           transition
           disablePortal
           className={
-            classNames({ [classes.popperClose]: !openNotification }) +
-            " " +
-            classes.popperNav
-          }
+            classNames({ [classes.popperClose]: !openNotification }) + " " + classes.popperNav}
         >
           {({ TransitionProps, placement }) => (
             <Grow

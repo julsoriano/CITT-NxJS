@@ -56,6 +56,14 @@ const dashboardRoutes = [
     layout: "/TrackMED",
   },
   {
+    path: "/Owner",
+    name: "Owner",
+    rtlName: "طباعة",
+    icon: "content_paste",
+
+    layout: "/TrackMED",
+  },
+  {
     path: "/movies",
     name: "Top 20 Movies",
     icon: Dashboard,

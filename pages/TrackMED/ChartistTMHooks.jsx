@@ -24,6 +24,7 @@ import CardFooter from "components/Card/CardFooter.js";
 import dashboardStyle from "assets/jss/nextjs-material-dashboard/views/dashboardStyle.js";
 
 import Chartist from "chartist";
+// import SafeChartist from "components/SafeChartist.js";
 
 // layout for this page
 import Admin from "layouts/Admin.js";
@@ -35,9 +36,12 @@ function ChartistPage(props) {
   const [list, setList] = useState({ labels:[], 
                   series:[[]] });
 
+  // const {window} = root;
+
+  if (typeof window == 'undefined') return;
+
   // I finally got this to work using https://swsinswsin.medium.com/unhandled-rejection-typeerror-this-setstate-is-not-a-function-9799dcb55c34
   // Solves the "Unhandled Rejection (TypeError): this is undefined - callback ...
-
   useEffect(() => {
     let mounted = true;
     fetch('http://localhost:5000/api/owner/getnoofcomps')
@@ -56,31 +60,9 @@ function ChartistPage(props) {
           setList({labels: data.labels, series: Array(data.series)})
         } 
       });
-    return () => mounted = false;
-  }, [])
 
-  /**
-  useEffect(() => {
-    let mounted = true;
-    fetch('http://localhost:5000/api/owner/getnoofcomps')
-      .then(response => response.json())
-      .then(function(ownerComps) {
-        var data = {
-          labels: ownerComps.map(function(ownerComps) {
-            return ownerComps.desc;
-          }),
-          series: ownerComps.map(function(ownerComps) {
-            return ownerComps.noOfComponents;
-          })
-        }
-      
-        if (mounted) {
-          setList({labels: data.labels, series: Array(data.series)})
-        } 
-      });
     return () => mounted = false;
   }, [])
-   */
 
   const { classes } = props;
   const options = {

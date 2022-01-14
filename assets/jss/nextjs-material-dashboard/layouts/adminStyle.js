@@ -31,6 +31,16 @@ const appStyle = (theme) => ({
   map: {
     marginTop: "70px",
   },
+  main: {
+    /* marginTop: "70px",
+    /*minHeight: "100%",
+    padding: "4rem 0",*/
+    flex: 1,
+    display: "flex",
+    flexDirection: "column",
+    justifyContent: "flex-start",
+    alignItems: "center"
+  }
 });
 
 export default appStyle;

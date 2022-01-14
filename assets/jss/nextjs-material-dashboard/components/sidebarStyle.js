@@ -1,3 +1,4 @@
+import { blue } from "@material-ui/core/colors";
 import {
   drawerWidth,
   transition,
@@ -144,6 +145,7 @@ const sidebarStyle = (theme) => ({
     "&:hover,&:focus,&:visited,&": {
       color: whiteColor,
     },
+
   },
   itemLink: {
     width: "auto",
@@ -323,6 +325,12 @@ const sidebarStyle = (theme) => ({
       width: "100%",
       bottom: "13px",
     },
+  },
+  active: {
+    '&:after, &': {
+      content: ' (active)',
+      color: blue,
+    }
   },
 });
 

@@ -22,6 +22,7 @@ import Head from "next/head";
 import Router from "next/router";
 
 import '../styles/globals.css'
+// import "assets/css/nextjs-material-dashboard.css?v=1.1.0";
 import Layout from '../layouts/Admin'
 /*
 import PageChange from "components/PageChange/PageChange.js";
@@ -69,10 +70,10 @@ export default class MyApp extends App {
 `);
     document.insertBefore(comment, document.documentElement);
   }
-
+  /*
   static async getInitialProps({ Component, router, ctx }) {
     let pageProps = {};
-
+    console.log("getInitialProps");
     if (Component.getInitialProps) {
       pageProps = await Component.getInitialProps(ctx);
       console.log("Props: " + Object.keys(pageProps));
@@ -85,13 +86,14 @@ export default class MyApp extends App {
     
     return { pageProps };
   }
-
+*/
   render() {
     console.log("MyApp");
     const { Component, pageProps } = this.props;
+    // console.log("Page props: " + JSON.stringify(pageProps));
 
-    //const Layout = Component.layout || (({ children }) => <>{children}</>);
-    //console.log("Layout Name: " + Layout.name);
+    // const Layout = Component.layout || (({ children }) => <>{children}</>);
+    console.log("Layout Name: " + Layout.name);
 
     return (
       <React.Fragment>
